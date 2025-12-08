@@ -3,13 +3,9 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"session-14/handler"
 )
 
-func HomePage(handlerTemplate handler.TemplateHandler) {
-	var choice string
-	fmt.Scan(&choice)
-
+func HomePage() {
 	for {
 		fmt.Println("\n=== HOME MENU ===")
 		fmt.Println("1. Create Data")
