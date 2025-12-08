@@ -6,11 +6,9 @@ import (
 	"session-14/handler"
 )
 
-func ReportMonthly(handlerReport handler.HandlerReport) {
-	var status, choice string
-	fmt.Print("Status : ")
-	fmt.Scan(&status)
-	handlerReport.ReportMonthly(status)
+func BusyAreas(handlerReport handler.HandlerReport) {
+	var choice string
+	handlerReport.BusyAreas()
 	fmt.Print("Apakah kamu ingin melanjutkan ke halaman lain ? ya / tidak")
 	fmt.Scan(&choice)
 
