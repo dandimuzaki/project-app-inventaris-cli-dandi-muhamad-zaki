@@ -3,12 +3,13 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"session-14/handler"
 )
 
-func HomePage() {
+func HomePage(handlerReport handler.HandlerReport) {
 	for {
 		fmt.Println("\n=== HOME MENU ===")
-		fmt.Println("1. Create Data")
+		fmt.Println("1. View Report Monthly")
 		fmt.Println("2. List Data")
 		fmt.Println("3. Update Data")
 		fmt.Println("4. Delete Data")
@@ -24,7 +25,8 @@ func HomePage() {
 
 		switch choice {
 		case 1:
-
+			ClearScreen()
+			ReportMonthly(handlerReport)
 		case 2:
 
 		case 3:
