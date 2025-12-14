@@ -1,95 +1,88 @@
 package repository
 
-import (
-	"testing"
+// func TestTotalOrderPerMount(t *testing.T) {
+// 	// Mock DB and sqlmock
+// 	mock, err := pgxmock.NewPool()
+// 	assert.NoError(t, err)
+// 	defer mock.Close()
 
-	"github.com/pashagolub/pgxmock/v4"
-	"github.com/stretchr/testify/assert"
-)
+// 	rows := pgxmock.NewRows([]string{"month", "total_order"}).
+// 		AddRow("January", 10).
+// 		AddRow("February", 20)
 
-func TestTotalOrderPerMount(t *testing.T) {
-	// Mock DB and sqlmock
-	mock, err := pgxmock.NewPool()
-	assert.NoError(t, err)
-	defer mock.Close()
+// 	mock.ExpectQuery("SELECT (.+) FROM orders WHERE status = \\$1 GROUP BY month ORDER BY MIN").
+// 		WithArgs("completed").
+// 		WillReturnRows(rows)
 
-	rows := pgxmock.NewRows([]string{"month", "total_order"}).
-		AddRow("January", 10).
-		AddRow("February", 20)
+// 	repo := NewRepoReport(mock)
 
-	mock.ExpectQuery("SELECT (.+) FROM orders WHERE status = \\$1 GROUP BY month ORDER BY MIN").
-		WithArgs("completed").
-		WillReturnRows(rows)
+// 	result, err := repo.GetReportMonthly("completed")
 
-	repo := NewRepoReport(mock)
+// 	assert.NoError(t, err)
+// 	assert.Len(t, result, 2)
 
-	result, err := repo.GetReportMonthly("completed")
+// 	assert.Equal(t, "January", result[0].Month)
+// 	assert.Equal(t, 10, result[0].TotalOrder)
 
-	assert.NoError(t, err)
-	assert.Len(t, result, 2)
+// 	assert.Equal(t, "February", result[1].Month)
+// 	assert.Equal(t, 20, result[1].TotalOrder)
 
-	assert.Equal(t, "January", result[0].Month)
-	assert.Equal(t, 10, result[0].TotalOrder)
+// 	err = mock.ExpectationsWereMet()
+// 	assert.NoError(t, err)
+// }
 
-	assert.Equal(t, "February", result[1].Month)
-	assert.Equal(t, 20, result[1].TotalOrder)
+// func TestTotalOrderPerArea(t *testing.T) {
+// 	mock, err := pgxmock.NewPool()
+// 	assert.NoError(t, err)
+// 	defer mock.Close()
 
-	err = mock.ExpectationsWereMet()
-	assert.NoError(t, err)
-}
+// 	rows := pgxmock.NewRows([]string{"area", "total_order"}).
+// 		AddRow("Sukajadi", 10).
+// 		AddRow("Antapani", 20)
 
-func TestTotalOrderPerArea(t *testing.T) {
-	mock, err := pgxmock.NewPool()
-	assert.NoError(t, err)
-	defer mock.Close()
+// 	mock.ExpectQuery(`SELECT.*FROM ride_requests`).
+// 		WillReturnRows(rows)
 
-	rows := pgxmock.NewRows([]string{"area", "total_order"}).
-		AddRow("Sukajadi", 10).
-		AddRow("Antapani", 20)
+// 	repo := NewRepoReport(mock)
 
-	mock.ExpectQuery(`SELECT.*FROM ride_requests`).
-		WillReturnRows(rows)
+// 	result, err := repo.GetBusyAreas()
 
-	repo := NewRepoReport(mock)
+// 	assert.NoError(t, err)
+// 	assert.Len(t, result, 2)
 
-	result, err := repo.GetBusyAreas()
+// 	assert.Equal(t, "Sukajadi", result[0].Area)
+// 	assert.Equal(t, 10, result[0].TotalOrder)
 
-	assert.NoError(t, err)
-	assert.Len(t, result, 2)
+// 	assert.Equal(t, "Antapani", result[1].Area)
+// 	assert.Equal(t, 20, result[1].TotalOrder)
 
-	assert.Equal(t, "Sukajadi", result[0].Area)
-	assert.Equal(t, 10, result[0].TotalOrder)
+// 	assert.NoError(t, mock.ExpectationsWereMet())
+// }
 
-	assert.Equal(t, "Antapani", result[1].Area)
-	assert.Equal(t, 20, result[1].TotalOrder)
+// func TestTotalOrderPerHour(t *testing.T) {
+// 	mock, err := pgxmock.NewPool()
+// 	assert.NoError(t, err)
+// 	defer mock.Close()
 
-	assert.NoError(t, mock.ExpectationsWereMet())
-}
+// 	rows := pgxmock.NewRows([]string{"hour", "total_order"}).
+// 		AddRow("06", 10).
+// 		AddRow("11", 20)
 
-func TestTotalOrderPerHour(t *testing.T) {
-	mock, err := pgxmock.NewPool()
-	assert.NoError(t, err)
-	defer mock.Close()
+// 	mock.ExpectQuery(`SELECT.*FROM ride_requests`).
+// 		WillReturnRows(rows)
 
-	rows := pgxmock.NewRows([]string{"hour", "total_order"}).
-		AddRow("06", 10).
-		AddRow("11", 20)
+// 	repo := NewRepoReport(mock)
 
-	mock.ExpectQuery(`SELECT.*FROM ride_requests`).
-		WillReturnRows(rows)
+// 	result, err := repo.GetBusyTimes()
 
-	repo := NewRepoReport(mock)
+// 	assert.NoError(t, err)
+// 	assert.Len(t, result, 2)
 
-	result, err := repo.GetBusyTimes()
+// 	assert.Equal(t, "06", result[0].Hour)
+// 	assert.Equal(t, 10, result[0].TotalOrder)
 
-	assert.NoError(t, err)
-	assert.Len(t, result, 2)
+// 	assert.Equal(t, "11", result[1].Hour)
+// 	assert.Equal(t, 20, result[1].TotalOrder)
 
-	assert.Equal(t, "06", result[0].Hour)
-	assert.Equal(t, 10, result[0].TotalOrder)
-
-	assert.Equal(t, "11", result[1].Hour)
-	assert.Equal(t, 20, result[1].TotalOrder)
-
-	assert.NoError(t, mock.ExpectationsWereMet())
-}
+// 	assert.NoError(t, mock.ExpectationsWereMet())
+// }

@@ -3,9 +3,10 @@ package repository
 import (
 	"context"
 	"errors"
-	"session-14/model"
+
 	"time"
 
+	"github.com/dandimuzaki/project-app-inventaris-cli-dandi-muhamad-zaki/model"
 	"github.com/jackc/pgx/v5"
 )
 

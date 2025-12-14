@@ -1,8 +1,6 @@
 package handler
 
-import (
-	"session-14/service"
-)
+import "github.com/dandimuzaki/project-app-inventaris-cli-dandi-muhamad-zaki/service"
 
 type TemplateHandler struct {
 	Service service.ServiceTemplate

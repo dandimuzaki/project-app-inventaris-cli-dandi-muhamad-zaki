@@ -3,24 +3,24 @@ package main
 import (
 	"context"
 	"log"
-	"session-14/cmd"
-	"session-14/database"
-	"session-14/handler"
-	"session-14/repository"
-	"session-14/service"
+
+	"github.com/dandimuzaki/project-app-inventaris-cli-dandi-muhamad-zaki/cmd"
+	"github.com/dandimuzaki/project-app-inventaris-cli-dandi-muhamad-zaki/database"
+	"github.com/dandimuzaki/project-app-inventaris-cli-dandi-muhamad-zaki/handler"
+	"github.com/dandimuzaki/project-app-inventaris-cli-dandi-muhamad-zaki/repository"
+	"github.com/dandimuzaki/project-app-inventaris-cli-dandi-muhamad-zaki/service"
 )
 
 func main() {
-	// init DB connection
+	// Init DB connection
 	db, err := database.InitDB()
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.Close(context.Background())
-
-	// init object
-	repoReport := repository.NewRepoReport(db)
-	serviceReport := service.NewServiceReport(&repoReport)
-	hadlerReport := handler.NewHandlerReport(&serviceReport)
-	cmd.HomePage(hadlerReport)
+	repo := repository.NewRepository(db) 		// Init repo
+	service := service.NewService(repo) 		// Init service
+	handler := handler.NewHandler(service) 	// Init handler
+	cmd.Init(handler)												// Init command
+	cmd.Execute()														// Execute command
 }

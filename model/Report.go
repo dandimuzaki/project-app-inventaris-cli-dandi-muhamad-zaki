@@ -1,6 +1,9 @@
 package model
 
 type Report struct {
-	TotalOrder int    `json:"total_order"`
-	Month      string `json:"month"`
+	ID             int
+	Name           string
+	Price          float64
+	YearsInService int
+	NetValue       float64
 }

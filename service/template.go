@@ -1,8 +1,8 @@
 package service
 
 import (
-	"session-14/model"
-	"session-14/repository"
+	"github.com/dandimuzaki/project-app-inventaris-cli-dandi-muhamad-zaki/model"
+	"github.com/dandimuzaki/project-app-inventaris-cli-dandi-muhamad-zaki/repository"
 )
 
 type ServiceTemplate struct {
