@@ -1,2 +1,4 @@
-# be-golang-implem-database
-this repo for implmen connect database in golang
+# Inventory App with Golang CLI
+
+Demo Video
+https://youtu.be/4rEfamngCg0
